@@ -27,5 +27,5 @@ jobs:
         dotnet build --configuration Release --no-restore ./apis/poi/web  
      
     - name: Test
-      run: dotnet test --no-restore --verbosity normal ./apis/poi/UnitTests
+      run: dotnet test --no-restore --verbosity normal ./apis/poi/tests/UnitTests
 
