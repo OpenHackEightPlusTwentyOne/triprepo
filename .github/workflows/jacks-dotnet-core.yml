@@ -25,9 +25,10 @@ jobs:
       run: dotnet restore
     
     - name: Build
-      working-directory: /home/runner/work/triprepo/triprepo/apis/pois
+      
       run:
         dotnet build --configuration Release --no-restore
+      working-directory: /home/runner/work/triprepo/triprepo/apis/pois
     - name: Test
-      working-directory:  /home/runner/work/triprepo/triprepo/apis/pois
       run: dotnet test --no-restore --verbosity normal
+      working-directory:  /home/runner/work/triprepo/triprepo/apis/pois
