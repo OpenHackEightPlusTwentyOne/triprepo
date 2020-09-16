@@ -5,10 +5,11 @@ on:
     branches: [ master ]
   pull_request:
     branches: [ master ]
+    
 env:
   BuildConfig: Release
   SolutionFile: Poi.sln
-  
+  working-directory: apis/poi
 
 jobs:
   build:
