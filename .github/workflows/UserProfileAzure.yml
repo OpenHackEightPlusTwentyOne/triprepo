@@ -15,10 +15,14 @@
 on:
   push:
     branches: [ master ]
-    paths: /apis/userprofile/**
+    paths:
+      - 'apis/userprofile/**'
+      - '.github/workflows/UserProfileAzure.yml'
   pull_request:
     branches: [ master ]
-    paths: /apis/userprofile/**
+    paths: 
+      - 'apis/userprofile/**'
+      - '.github/workflows/UserProfileAzure.yml'
 
 env:
   AZURE_WEBAPP_NAME: openhackrj195ck7userprofile    # set this to your application's name
