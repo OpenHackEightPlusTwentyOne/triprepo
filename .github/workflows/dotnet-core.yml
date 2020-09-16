@@ -18,7 +18,7 @@ jobs:
       with:
         dotnet-version: 2.1
     - name: Install dependencies
-      run: dotnet restore -p /apis/poi/tests/UnitTests/UnitTests.csproj
+      run: dotnet restore --project /apis/poi/
 #      working-directory: /apis/poi/
     - name: Build
       run: dotnet build --configuration Release --no-restore
