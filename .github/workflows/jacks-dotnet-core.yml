@@ -22,14 +22,13 @@ jobs:
       with:
         dotnet-version: 2.1
     - name: Install dependencies
-      working-directory: apis/pois
+      working-directory: ./apis/pois
       run: dotnet restore
     
     - name: Build
-      
       run:
         dotnet build --configuration Release --no-restore
-      working-directory: apis/pois
+      working-directory: ./apis/pois
     - name: Test
       run: dotnet test --no-restore --verbosity normal
-      working-directory: tapis/pois
+      working-directory: ./apis/pois
