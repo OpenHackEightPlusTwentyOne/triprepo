@@ -16,8 +16,10 @@
 on:
   push:
     branches: [ master ]
+    paths: /apis/userprofile/**
   pull_request:
     branches: [ master ]
+    paths: /apis/userprofile/**
 
 env:
   AZURE_WEBAPP_NAME: openhackrj195ck7userprofile    # set this to your application's name
@@ -39,8 +41,8 @@ jobs:
         # Build and test the project, then
         # deploy to Azure Web App.
         npm install ./apis/userprofile
-        npm run build ./apis/userprofile --if-present
-        npm run test ./apis/userprofile --if-present
+        npm run build --if-present
+        npm run test --if-present
     - name: 'Deploy to Azure WebApp'
       uses: azure/webapps-deploy@v2
       with:
