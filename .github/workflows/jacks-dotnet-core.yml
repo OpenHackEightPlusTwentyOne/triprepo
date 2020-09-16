@@ -7,7 +7,7 @@ on:
     branches: [ master ]
 env:
   BuildConfig: Release
-  SolutionFile: ./apis/poi/Poi.sln
+  SolutionFile: Poi.sln
 
 
 jobs:
@@ -23,6 +23,7 @@ jobs:
         dotnet-version: 2.1
     - name: Install dependencies
       run: dotnet restore
+    - uses: /apis/poi
     - name: Build
       run: dotnet build --configuration Release --no-restore
     - name: Test
