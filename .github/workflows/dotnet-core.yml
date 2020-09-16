@@ -18,9 +18,9 @@ jobs:
       with:
         dotnet-version: 2.1
     - name: Install dependencies
-      run: dotnet restore
+      run: dotnet restore -p /apis/poi/tests/UnitTests/UnitTests.csproj
 #      working-directory: /apis/poi/
     - name: Build
       run: dotnet build --configuration Release --no-restore
     - name: Test
-      run: dotnet test /apis/poi/tests/UnitTests/UnitTests.csproj --no-restore --verbosity normal
+      run: dotnet test --no-restore --verbosity normal
