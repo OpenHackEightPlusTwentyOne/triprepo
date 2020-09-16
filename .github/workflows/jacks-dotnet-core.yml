@@ -21,8 +21,8 @@ jobs:
       with:
         dotnet-version: 2.1
     - name: Install dependencies
-      working-directory: ./apis/pois
-      run: dotnet restore
+      working-directory: apis/pois
+      run: dotnet restore 
     
     - name: Build
       run:
