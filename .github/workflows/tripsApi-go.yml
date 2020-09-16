@@ -4,13 +4,13 @@ on:
   push:
     branches: [ master ]
     paths: 
-    - /apis/trips/** 
-    - /.github/workflows/tripsApi-go.yml
+    - apis/trips/** 
+    - .github/workflows/tripsApi-go.yml
   pull_request:
     branches: [ master ]
     paths: 
-    - /apis/trips/** 
-    - /.github/workflows/tripsApi-go.yml
+    - apis/trips/** 
+    - .github/workflows/tripsApi-go.yml
 
 jobs:
 
