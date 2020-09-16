@@ -27,9 +27,7 @@ jobs:
     - name: Build
       run:
         dotnet build --configuration Release --no-restore
-        working-directory: ./apis/poi/web
         
     - name: Test
       run: dotnet test --no-restore --verbosity normal ./apis/poi/tests/UnitTests
-       working-directory: ./apis/poi/tests/UnitTests
-
+       
