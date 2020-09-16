@@ -9,7 +9,6 @@ on:
 env:
   BuildConfig: Release
   SolutionFile: Poi.sln
-  working-directory: ./apis/poi
 
 jobs:
   build:
