@@ -9,7 +9,7 @@ on:
 env:
   BuildConfig: Release
   SolutionFile: Poi.sln
-  working-directory: apis/poi
+  working-directory: ./apis/poi
 
 jobs:
   build:
@@ -26,9 +26,9 @@ jobs:
       run: dotnet restore
     
     - name: Build
-      working-directory: apis/poi/web
+      working-directory: ./apis/poi/web
       run:
         dotnet build --configuration Release --no-restore
     - name: Test
-      working-directory: apis/pois/tests/UnitTests
+      working-directory: ./apis/pois/tests/UnitTests
       run: dotnet test --no-restore --verbosity normal
