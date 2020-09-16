@@ -11,6 +11,7 @@ on:
     paths: 
     - /apis/trips/** 
     - /.github/workflows/tripsApi-go.yml
+
 jobs:
 
   build:
@@ -28,7 +29,7 @@ jobs:
       uses: actions/checkout@v2
 
     - name: Get dependencies
-      working-directory: /apis/trips/
+      working-directory: apis/trips/
       run: |
         go get -v -t -d ./...
         if [ -f Gopkg.toml ]; then
@@ -37,9 +38,9 @@ jobs:
         fi
 
     - name: Build
-      working-directory: /apis/trips/
+      working-directory: apis/trips/
       run: go build -v .
 
     - name: Test
-      working-directory: /apis/trips/
+      working-directory: apis/trips/
       run: go test -v .
