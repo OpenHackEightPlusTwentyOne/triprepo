@@ -25,7 +25,7 @@ jobs:
         dotnet-version: 2.1
     - name: Install dependencies
       run: dotnet restore ./apis/poi/
-#      working-directory: /apis/poi/ 
+#      working-directory: /apis/poi/  
     - name: Build
       run: dotnet build --configuration Release --no-restore ./apis/poi/web
     - name: Test
