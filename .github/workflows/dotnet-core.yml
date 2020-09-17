@@ -4,13 +4,13 @@ on:
   push:
     branches: [ master ]
     paths: 
-    - /apis/poi/** 
-    - /.github/workflows/dotnet-core.yml
+    - apis/poi/** 
+    - .github/workflows/dotnet-core.yml
   pull_request:
     branches: [ master ]
     paths:    
-    - /apis/poi/** 
-    - /.github/workflows/dotnet-core.yml
+    - apis/poi/** 
+    - .github/workflows/dotnet-core.yml
 
 jobs:
   build:
@@ -25,22 +25,36 @@ jobs:
         dotnet-version: 2.1
     - name: Install dependencies
       run: dotnet restore ./apis/poi/
-#      working-directory: /apis/poi/
+#      working-directory: /apis/poi/  
     - name: Build
       run: dotnet build --configuration Release --no-restore ./apis/poi/web
     - name: Test
       run: dotnet test --no-restore --verbosity normal ./apis/poi/tests/UnitTests
-
+          
     - name: 'Login via Azure CLI'
+      if: ${{ github.ref == 'ref/head/master' }}
       uses: azure/login@v1
       with:
-        creds: ${​​{​​ secrets.JB_AZURE_CREDENTIALS }​​}​​
+        creds: ${{ secrets.JB_AZURE_CREDENTIALS }}
+ 
     - name: 'Build and push image'
-      uses: azure/docker-login@v1
+      if: ${{ github.ref == 'ref/head/master' }}
+      uses: azure/docker-login@v1 
       with:
-        login-server: ${​​{​​ secrets.JB_REGISTRY_LOGIN_SERVER }​​}​​
-        username: ${​​{​​ secrets.JB_REGISTRY_USERNAME }​​}​​
-        password: ${​​{​​ secrets.JB_REGISTRY_PASSWORD }​​}​​
-    - run: |
-        docker build apis/poi/web/ -t openhackrj195ck7acr.azurecr.io/devopsoh/api-poi:${​​{​​ github.sha }​​}
-        docker push openhackrj195ck7acr.azurecr.io/devopsoh/api-poi:${​​{​​ github.sha }​​}​
+        login-server: ${{ secrets.JB_REGISTRY_LOGIN_SERVER }}
+        username: ${{ secrets.JB_REGISTRY_USERNAME }}
+        password: ${{ secrets.JB_REGISTRY_PASSWORD }}    
+      
+    - name: 'Build and push part 2'
+      if: ${{ github.ref == 'ref/head/master' }}
+      run: |
+        docker build apis/poi/web/ -t openhackrj195ck7acr.azurecr.io/devopsoh/api-poi:${{ github.run_id }}
+        docker push openhackrj195ck7acr.azurecr.io/devopsoh/api-poi:${{ github.run_id }}
+        
+    - name: 'Deploy Task'    
+      if: ${{ github.ref == 'ref/head/master' }}
+      uses: azure/webapps-deploy@v2
+      with:
+        app-name: 'openhackrj195ck7poi'
+        publish-profile: ${{ secrets.POI_PUBLISH }}
+        images: openhackrj195ck7acr.azurecr.io/devopsoh/api-poi:${{ github.run_id }}
