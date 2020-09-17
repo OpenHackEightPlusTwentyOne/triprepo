@@ -31,7 +31,7 @@ jobs:
       
   deploy: 
    runs-on: ubuntu-latest
-   if: ${{ github.ref == 'refs/head/master' }}
+   # if: ${{ github.ref == 'refs/head/master' }}
    steps:
     - name: 'Login via Azure CLI'
       uses: azure/login@v1
