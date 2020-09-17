@@ -58,9 +58,9 @@ jobs:
         docker build apis/poi/web/. -t openhackrj195ck7acr.azurecr.io/devopsoh/api-poi:${{ github.run_id }}
         docker push openhackrj195ck7acr.azurecr.io/devopsoh/api-poi:${{ github.run_id }}
         
-    - name: 'Deploy Task'    
+    - name: 'Deploy to Staging Task'    
       uses: azure/webapps-deploy@v2
       with:
         app-name: 'openhackrj195ck7poi'
-        publish-profile: ${{ secrets.POI_PUBLISH }}
+        publish-profile: ${{ secrets.POI_STG_PUBLISH }}
         images: openhackrj195ck7acr.azurecr.io/devopsoh/api-poi:${{ github.run_id }}
