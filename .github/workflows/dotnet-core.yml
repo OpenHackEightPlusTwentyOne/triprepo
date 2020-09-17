@@ -30,9 +30,6 @@ jobs:
       run: dotnet build --configuration Release --no-restore ./apis/poi/web
     - name: Test
       run: dotnet test --no-restore --verbosity normal ./apis/poi/tests/UnitTests
-
-    - name: 'check secretes'
-      run: echo ${{ secrets.JB_AZURE_CREDENTIALS }} 
           
     - name: 'Login via Azure CLI'
       uses: azure/login@v1
@@ -48,3 +45,9 @@ jobs:
     - run: |
         docker build apis/poi/web/ -t openhackrj195ck7acr.azurecr.io/devopsoh/api-poi:${{ github.run_id }}
         docker push openhackrj195ck7acr.azurecr.io/devopsoh/api-poi:${{ github.run_id }}
+        
+    - uses: azure/webapps-deploy@v2
+      with:
+        app-name: 'openhackrj195ck7poi'
+        publish-profile: ${{ secrets.POI_PUBLISH }}
+        images: openhackrj195ck7acr.azurecr.io/devopsoh/api-poi:${{ github.run_id }}
