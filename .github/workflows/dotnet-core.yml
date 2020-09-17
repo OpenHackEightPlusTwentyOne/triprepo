@@ -42,5 +42,5 @@ jobs:
         username: ${{ secrets.JB_REGISTRY_USERNAME }}
         password: ${{ secrets.JB_REGISTRY_PASSWORD }}
     - run: |
-        docker build apis/poi/web/ -t openhackrj195ck7acr.azurecr.io/devopsoh/api-poi:${{ github.run_number }}
-        docker push openhackrj195ck7acr.azurecr.io/devopsoh/api-poi:${{ github.run_number }}
+        docker build apis/poi/web/ -t openhackrj195ck7acr.azurecr.io/devopsoh/api-poi:${{ github.run_id }}
+        docker push openhackrj195ck7acr.azurecr.io/devopsoh/api-poi:${{ github.run_id }}
