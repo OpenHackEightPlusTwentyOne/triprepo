@@ -89,7 +89,7 @@ jobs:
        Write-Host " Status code is $($output.statusCode) "
        if($($output.statusCode) -eq 200) {
        Write-host "Healthy"
-       Switch-AzWebAppSlot -SourceSlotName "openhackrj195ck7poi-staging" -DestinationSlotName "openhackrj195ck7poi" -ResourceGroupName "openhackrj195ck7rg" -Name "openhackrj195ck7poi"
+       az webapp deployment slot swap -g openhackrj195ck7rg -n openhackrj195ck7poi --slot staging --target-slot production
        }
        else {
        Write-Error "POI API is not healthy"
