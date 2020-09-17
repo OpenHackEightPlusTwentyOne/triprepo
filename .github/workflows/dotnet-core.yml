@@ -31,10 +31,14 @@ jobs:
     - name: Test
       run: dotnet test --no-restore --verbosity normal ./apis/poi/tests/UnitTests
 
+    - name: 'check secretes'
+      run: echo ${{ secrets.JB_AZURE_CREDENTIALS }} 
+          
     - name: 'Login via Azure CLI'
       uses: azure/login@v1
       with:
         creds: ${{ secrets.JB_AZURE_CREDENTIALS }}
+      
     - name: 'Build and push image'
       uses: azure/docker-login@v1
       with:
