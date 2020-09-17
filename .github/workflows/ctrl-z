@@ -1,7 +1,7 @@
 name: crtl-z
 
 on:
- workflow_dispatch
+ workflow_dispatch:
 
 jobs:
   ctrl-z:
