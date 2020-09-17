@@ -64,3 +64,35 @@ jobs:
         app-name: 'openhackrj195ck7poi'
         publish-profile: ${{ secrets.POI_STG_PUBLISH }}
         images: openhackrj195ck7acr.azurecr.io/devopsoh/api-poi:${{ github.run_id }}
+### The following code validates the staging slot (healthcheck) ####
+  testandswap:
+   runs-on: ubuntu-latest
+   needs: 
+    - build
+    - deploy
+   if: github.ref == 'refs/heads/master'
+   steps:
+    - name: 'Login via Azure CLI'
+      uses: azure/login@v1
+      with:
+        creds: ${{ secrets.JB_AZURE_CREDENTIALS }}
+    - name: POI Healthcheck
+      id: poi-health-check
+      uses: satak/webrequest-action@master
+      with:
+        url: https://openhackrj195ck7poi-staging.azurewebsites.net/api/healthcheck/poi
+        method: GET
+    - name: Check the health POI API
+      shell: pwsh
+      run: |
+       $output = '${{ steps.poi-health-check.outputs.output }}' | ConvertFrom-Json
+       Write-Host " Status code is $($output.statusCode) "
+       if($($output.statusCode) -eq 200) {
+       Write-host "Healthy"
+       Switch-AzWebAppSlot -SourceSlotName "openhackrj195ck7poi-staging" -DestinationSlotName "openhackrj195ck7poi" -ResourceGroupName "openhackrj195ck7rg" -Name "openhackrj195ck7poi"
+       }
+       else {
+       Write-Error "POI API is not healthy"
+       }
+
+
