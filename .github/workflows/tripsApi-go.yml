@@ -56,6 +56,6 @@ jobs:
           username: ${{ secrets.JB_REGISTRY_USERNAME }}
           password: ${{ secrets.JB_REGISTRY_PASSWORD }}
     - run: |
-          docker build . -t ${{ secrets.JB_REGISTRY_LOGIN_SERVER }}/tripApiGo:${{ github.sha }}
-          docker push ${{ secrets.JB_REGISTRY_LOGIN_SERVER }}/tripApiGo:${{ github.sha }}: 
+          docker build . -t openhackrj195ck7acr.azurecr.io/tripApiGo:${{ github.sha }}
+          docker push openhackrj195ck7acr.azurecr.io/tripApiGo:${{ github.sha }}: 
             
