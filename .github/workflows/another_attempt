@@ -1,4 +1,4 @@
-name: my-ab
+name: myrollback
 on:
  workflow_dispatch:
  inputs:
