@@ -34,13 +34,13 @@ jobs:
     - name: 'Login via Azure CLI'
       uses: azure/login@v1
       with:
-        creds: ${​​{​​ secrets.JB_AZURE_CREDENTIALS }​​}​​
+        creds: ${{ secrets.JB_AZURE_CREDENTIALS }}
     - name: 'Build and push image'
       uses: azure/docker-login@v1
       with:
-        login-server: ${​​{​​ secrets.JB_REGISTRY_LOGIN_SERVER }​​}​​
-        username: ${​​{​​ secrets.JB_REGISTRY_USERNAME }​​}​​
-        password: ${​​{​​ secrets.JB_REGISTRY_PASSWORD }​​}​​
+        login-server: ${{ secrets.JB_REGISTRY_LOGIN_SERVER }}
+        username: ${{ secrets.JB_REGISTRY_USERNAME }}
+        password: ${{ secrets.JB_REGISTRY_PASSWORD }}
     - run: |
-        docker build apis/poi/web/ -t openhackrj195ck7acr.azurecr.io/devopsoh/api-poi:${​​{​​ github.sha }​​}
-        docker push openhackrj195ck7acr.azurecr.io/devopsoh/api-poi:${​​{​​ github.sha }​​}​
+        docker build apis/poi/web/ -t openhackrj195ck7acr.azurecr.io/devopsoh/api-poi:${{ github.sha }}
+        docker push openhackrj195ck7acr.azurecr.io/devopsoh/api-poi:${{ github.sha }}
