@@ -1,5 +1,4 @@
-name: crtl-z
-
+name: my-ab
 on:
  workflow_dispatch:
  inputs:
