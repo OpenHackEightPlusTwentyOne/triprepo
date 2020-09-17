@@ -55,9 +55,8 @@ jobs:
           login-server: ${{ secrets.JB_REGISTRY_LOGIN_SERVER }}
           username: ${{ secrets.JB_REGISTRY_USERNAME }}
           password: ${{ secrets.JB_REGISTRY_PASSWORD }}
-   
+          working-directory: apis/trips/
     - run: |
-          cd apis/trips
           docker build . -t openhackrj195ck7acr.azurecr.io/tripapigo:${{ github.sha }}
           docker push openhackrj195ck7acr.azurecr.io/tripapigo:${{ github.sha }}
        
