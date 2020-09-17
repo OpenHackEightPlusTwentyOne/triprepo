@@ -13,5 +13,5 @@ jobs:
         creds: ${{ secrets.JB_AZURE_CREDENTIALS }}
     - name: 'make the swap'
       shell: pwsh
-      run: az webapp deployment slot swap -g openhackrj195ck7rg -n openhackrj195ck7poi --slot production --target-slot staging
+      run: az webapp deployment slot swap -g openhackrj195ck7rg -n openhackrj195ck7poi --slot staging --target-slot production
 
