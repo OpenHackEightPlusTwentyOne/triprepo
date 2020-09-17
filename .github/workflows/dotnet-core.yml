@@ -45,7 +45,6 @@ jobs:
         username: ${{ secrets.JB_REGISTRY_USERNAME }}
         password: ${{ secrets.JB_REGISTRY_PASSWORD }}     
     - run: |
-        if: ${{ github.ref == 'ref/head/master' }}
         docker build apis/poi/web/ -t openhackrj195ck7acr.azurecr.io/devopsoh/api-poi:${{ github.run_id }}
         docker push openhackrj195ck7acr.azurecr.io/devopsoh/api-poi:${{ github.run_id }}
         
