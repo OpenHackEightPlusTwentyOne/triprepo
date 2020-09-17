@@ -57,7 +57,7 @@ jobs:
           password: ${{ secrets.JB_REGISTRY_PASSWORD }}
           
     - run: |
-          docker build api/trips/. -t openhackrj195ck7acr.azurecr.io/tripapigo:${{ github.sha }}
+          docker build apis/trips/. -t openhackrj195ck7acr.azurecr.io/tripapigo:${{ github.sha }}
           docker push openhackrj195ck7acr.azurecr.io/tripapigo:${{ github.sha }}
        
             
