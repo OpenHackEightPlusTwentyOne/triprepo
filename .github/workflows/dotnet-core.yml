@@ -34,6 +34,13 @@ jobs:
    needs: build
    # if: ${{ github.ref == 'refs/head/master' }}
    steps:
+    - uses: actions/checkout@v2
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 2.1
+    - name: Install dependencies
+      run: dotnet restore ./apis/poi/
     - name: 'Login via Azure CLI'
       uses: azure/login@v1
       with:
