@@ -32,12 +32,14 @@ jobs:
       run: dotnet test --no-restore --verbosity normal ./apis/poi/tests/UnitTests
           
     - name: 'Login via Azure CLI'
+      if: ${{ github.ref == 'ref/head/master' }}
       uses: azure/login@v1
       with:
         creds: ${{ secrets.JB_AZURE_CREDENTIALS }}
-      
+    
     - name: 'Build and push image'
       uses: azure/docker-login@v1
+      if: ${{ github.ref == 'ref/head/master' }}
       with:
         login-server: ${{ secrets.JB_REGISTRY_LOGIN_SERVER }}
         username: ${{ secrets.JB_REGISTRY_USERNAME }}
@@ -47,6 +49,7 @@ jobs:
         docker push openhackrj195ck7acr.azurecr.io/devopsoh/api-poi:${{ github.run_id }}
         
     - uses: azure/webapps-deploy@v2
+      if: ${{ github.ref == 'ref/head/master' }}
       with:
         app-name: 'openhackrj195ck7poi'
         publish-profile: ${{ secrets.POI_PUBLISH }}
